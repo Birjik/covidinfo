@@ -1,0 +1,54 @@
+#backButton:active{
+  transform: translateX(-1px);
+}
+
+.infoCell {
+  width: 400px;
+  font-family: Roboto-Regular; 
+  padding-left: 37px;
+  padding-right: 10px; 
+  padding-bottom: 10px;
+}
+
+.borderRight {
+	border-right: 1px solid #dfe1e5; 
+}
+.firstCell {
+	padding-right: 9px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    margin-bottom: 0px;
+}
+.cell {
+	padding: 0 9px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    margin-bottom: 0px;
+}
+.cellText {
+	font-size: 14px; 
+	color: #3C4043; 
+	white-space: nowrap;
+}
+
+.cellNumber {
+	color:#202124;
+	font-size: 24px; 
+	padding: 2px 0px; 
+	font-family: Roboto-Medium;
+}
+#countryText {
+	font-size: 25px;  
+	padding-left: 5px; 
+	display: inline-block;
+	vertical-align: middle;
+}
+#chartText {
+	font-size: 25px;  
+	padding-left: 36px; 
+	padding-bottom: 15px;
+	display: inline-block;
+	vertical-align: middle;
+}
