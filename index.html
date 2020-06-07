@@ -453,7 +453,7 @@
         },
         onRegionClick: function(event, code){
           currentCountry = code;
-          updateCountry(map.getRegionName(code), "./countryFlags/" + code + ".png", 20);
+          updateCountry(map.getRegionName(code), ".\\countryFlags\\" + code + ".png", 20);
           updateCountryInfo(code, sliderPosition);
           changeChart();
           backButton.hidden = false;
