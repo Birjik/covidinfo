@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Covid-19 Map</title>
+  <link rel="stylesheet" media="all" href="style/jquery-jvectormap.css"/>
+
+  <script src="javascript/jquery.js"></script>
+  <link rel="stylesheet" media="all" href="style/rangeslider.css"/>
+  
+
+  <link rel="stylesheet" media="all" href="style/buttons.css"/>
+  <link rel="stylesheet" media="all" href="style/info.css"/>
+  <script src="javascript/rangeslider.min.js"></script>
+  <link href="style/dygraph.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="javascript/dygraph.js"></script>
+  <script type="text/javascript" src="data.js"></script>
+  <script type="text/javascript">
+    var data = {}; // color number of confirmed people for each day
+    var dataActive = {};
+    var info = {}; // confirmed, dead, recovered for each day
+    var charts = {};
+    var chartsActive = {};
+    var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var startDate = new Date(2019, 11, 30);
+    var lastDate = new Date(2020, 5, 6);
+    var numberOfDays = (lastDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24); 
+    var sliderPosition = 0;
+    var currentCountry = "WORLD";
+    var currentState = "Confirmed";
+  </script>
+  
+  <!-- covid data --> 
+<script src='./data/result/2019-12-30.js'></script>
+<script src='./data/result/2019-12-31.js'></script>
+<script src='./data/result/2020-01-01.js'></script>
+<script src='./data/result/2020-01-02.js'></script>
+<script src='./data/result/2020-01-03.js'></script>
+<script src='./data/result/2020-01-04.js'></script>
+<script src='./data/result/2020-01-05.js'></script>
+<script src='./data/result/2020-01-06.js'></script>
+<script src='./data/result/2020-01-07.js'></script>
+<script src='./data/result/2020-01-08.js'></script>
+<script src='./data/result/2020-01-09.js'></script>
+<script src='./data/result/2020-01-10.js'></script>
+<script src='./data/result/2020-01-11.js'></script>
+<script src='./data/result/2020-01-12.js'></script>
+<script src='./data/result/2020-01-13.js'></script>
+<script src='./data/result/2020-01-14.js'></script>
+<script src='./data/result/2020-01-15.js'></script>
+<script src='./data/result/2020-01-16.js'></script>
+<script src='./data/result/2020-01-17.js'></script>
+<script src='./data/result/2020-01-18.js'></script>
+<script src='./data/result/2020-01-19.js'></script>
+<script src='./data/result/2020-01-20.js'></script>
+<script src='./data/result/2020-01-21.js'></script>
+<script src='./data/result/2020-01-22.js'></script>
+<script src='./data/result/2020-01-23.js'></script>
+<script src='./data/result/2020-01-24.js'></script>
+<script src='./data/result/2020-01-25.js'></script>
+<script src='./data/result/2020-01-26.js'></script>
+<script src='./data/result/2020-01-27.js'></script>
+<script src='./data/result/2020-01-28.js'></script>
+<script src='./data/result/2020-01-29.js'></script>
+<script src='./data/result/2020-01-30.js'></script>
+<script src='./data/result/2020-01-31.js'></script>
+<script src='./data/result/2020-02-01.js'></script>
+<script src='./data/result/2020-02-02.js'></script>
+<script src='./data/result/2020-02-03.js'></script>
+<script src='./data/result/2020-02-04.js'></script>
+<script src='./data/result/2020-02-05.js'></script>
+<script src='./data/result/2020-02-06.js'></script>
+<script src='./data/result/2020-02-07.js'></script>
+<script src='./data/result/2020-02-08.js'></script>
+<script src='./data/result/2020-02-09.js'></script>
+<script src='./data/result/2020-02-10.js'></script>
+<script src='./data/result/2020-02-11.js'></script>
+<script src='./data/result/2020-02-12.js'></script>
+<script src='./data/result/2020-02-13.js'></script>
+<script src='./data/result/2020-02-14.js'></script>
+<script src='./data/result/2020-02-15.js'></script>
+<script src='./data/result/2020-02-16.js'></script>
+<script src='./data/result/2020-02-17.js'></script>
+<script src='./data/result/2020-02-18.js'></script>
+<script src='./data/result/2020-02-19.js'></script>
+<script src='./data/result/2020-02-20.js'></script>
+<script src='./data/result/2020-02-21.js'></script>
+<script src='./data/result/2020-02-22.js'></script>
+<script src='./data/result/2020-02-23.js'></script>
+<script src='./data/result/2020-02-24.js'></script>
+<script src='./data/result/2020-02-25.js'></script>
+<script src='./data/result/2020-02-26.js'></script>
+<script src='./data/result/2020-02-27.js'></script>
+<script src='./data/result/2020-02-28.js'></script>
+<script src='./data/result/2020-02-29.js'></script>
+<script src='./data/result/2020-03-01.js'></script>
+<script src='./data/result/2020-03-02.js'></script>
+<script src='./data/result/2020-03-03.js'></script>
+<script src='./data/result/2020-03-04.js'></script>
+<script src='./data/result/2020-03-05.js'></script>
+<script src='./data/result/2020-03-06.js'></script>
+<script src='./data/result/2020-03-07.js'></script>
+<script src='./data/result/2020-03-08.js'></script>
+<script src='./data/result/2020-03-09.js'></script>
+<script src='./data/result/2020-03-10.js'></script>
+<script src='./data/result/2020-03-11.js'></script>
+<script src='./data/result/2020-03-12.js'></script>
+<script src='./data/result/2020-03-13.js'></script>
+<script src='./data/result/2020-03-14.js'></script>
+<script src='./data/result/2020-03-15.js'></script>
+<script src='./data/result/2020-03-16.js'></script>
+<script src='./data/result/2020-03-17.js'></script>
+<script src='./data/result/2020-03-18.js'></script>
+<script src='./data/result/2020-03-19.js'></script>
+<script src='./data/result/2020-03-20.js'></script>
+<script src='./data/result/2020-03-21.js'></script>
+<script src='./data/result/2020-03-22.js'></script>
+<script src='./data/result/2020-03-23.js'></script>
+<script src='./data/result/2020-03-24.js'></script>
+<script src='./data/result/2020-03-25.js'></script>
+<script src='./data/result/2020-03-26.js'></script>
+<script src='./data/result/2020-03-27.js'></script>
+<script src='./data/result/2020-03-28.js'></script>
+<script src='./data/result/2020-03-29.js'></script>
+<script src='./data/result/2020-03-30.js'></script>
+<script src='./data/result/2020-03-31.js'></script>
+<script src='./data/result/2020-04-01.js'></script>
+<script src='./data/result/2020-04-02.js'></script>
+<script src='./data/result/2020-04-03.js'></script>
+<script src='./data/result/2020-04-04.js'></script>
+<script src='./data/result/2020-04-05.js'></script>
+<script src='./data/result/2020-04-06.js'></script>
+<script src='./data/result/2020-04-07.js'></script>
+<script src='./data/result/2020-04-08.js'></script>
+<script src='./data/result/2020-04-09.js'></script>
+<script src='./data/result/2020-04-10.js'></script>
+<script src='./data/result/2020-04-11.js'></script>
+<script src='./data/result/2020-04-12.js'></script>
+<script src='./data/result/2020-04-13.js'></script>
+<script src='./data/result/2020-04-14.js'></script>
+<script src='./data/result/2020-04-15.js'></script>
+<script src='./data/result/2020-04-16.js'></script>
+<script src='./data/result/2020-04-17.js'></script>
+<script src='./data/result/2020-04-18.js'></script>
+<script src='./data/result/2020-04-19.js'></script>
+<script src='./data/result/2020-04-20.js'></script>
+<script src='./data/result/2020-04-21.js'></script>
+<script src='./data/result/2020-04-22.js'></script>
+<script src='./data/result/2020-04-23.js'></script>
+<script src='./data/result/2020-04-24.js'></script>
+<script src='./data/result/2020-04-25.js'></script>
+<script src='./data/result/2020-04-26.js'></script>
+<script src='./data/result/2020-04-27.js'></script>
+<script src='./data/result/2020-04-28.js'></script>
+<script src='./data/result/2020-04-29.js'></script>
+<script src='./data/result/2020-04-30.js'></script>
+<script src='./data/result/2020-05-01.js'></script>
+<script src='./data/result/2020-05-02.js'></script>
+<script src='./data/result/2020-05-03.js'></script>
+<script src='./data/result/2020-05-04.js'></script>
+<script src='./data/result/2020-05-05.js'></script>
+<script src='./data/result/2020-05-06.js'></script>
+<script src='./data/result/2020-05-07.js'></script>
+<script src='./data/result/2020-05-08.js'></script>
+<script src='./data/result/2020-05-09.js'></script>
+<script src='./data/result/2020-05-10.js'></script>
+<script src='./data/result/2020-05-11.js'></script>
+<script src='./data/result/2020-05-12.js'></script>
+<script src='./data/result/2020-05-13.js'></script>
+<script src='./data/result/2020-05-14.js'></script>
+<script src='./data/result/2020-05-15.js'></script>
+<script src='./data/result/2020-05-16.js'></script>
+<script src='./data/result/2020-05-17.js'></script>
+<script src='./data/result/2020-05-18.js'></script>
+<script src='./data/result/2020-05-19.js'></script>
+<script src='./data/result/2020-05-20.js'></script>
+<script src='./data/result/2020-05-21.js'></script>
+<script src='./data/result/2020-05-22.js'></script>
+<script src='./data/result/2020-05-23.js'></script>
+<script src='./data/result/2020-05-24.js'></script>
+<script src='./data/result/2020-05-25.js'></script>
+<script src='./data/result/2020-05-26.js'></script>
+<script src='./data/result/2020-05-27.js'></script>
+<script src='./data/result/2020-05-28.js'></script>
+<script src='./data/result/2020-05-29.js'></script>
+<script src='./data/result/2020-05-30.js'></script>
+<script src='./data/result/2020-05-31.js'></script>
+<script src='./data/result/2020-06-01.js'></script>
+<script src='./data/result/2020-06-02.js'></script>
+<script src='./data/result/2020-06-03.js'></script>
+<script src='./data/result/2020-06-04.js'></script>
+<script src='./data/result/2020-06-05.js'></script>
+<script src='./data/result/2020-06-06.js'></script>
+<script src="./data/charts.js"></script>
+<script src="./data/chartsActive.js"></script>
+
+  <!-- covid data -->
+
+  <script src="javascript/jquery-jvectormap.js"></script>
+  <script src="javascript/jquery-mousewheel.js"></script>
+  <script src="javascript/jvectormap.js"></script>
+
+  <script src="javascript/abstract-element.js"></script>
+  <script src="javascript/abstract-canvas-element.js"></script>
+  <script src="javascript/abstract-shape-element.js"></script>
+
+  <script src="javascript/svg-element.js"></script>
+  <script src="javascript/svg-group-element.js"></script>
+  <script src="javascript/svg-canvas-element.js"></script>
+  <script src="javascript/svg-shape-element.js"></script>
+  <script src="javascript/svg-path-element.js"></script>
+  <script src="javascript/svg-circle-element.js"></script>
+  <script src="javascript/svg-image-element.js"></script>
+  <script src="javascript/svg-text-element.js"></script>
+
+  <script src="javascript/vml-element.js"></script>
+  <script src="javascript/vml-group-element.js"></script>
+  <script src="javascript/vml-canvas-element.js"></script>
+  <script src="javascript/vml-shape-element.js"></script>
+  <script src="javascript/vml-path-element.js"></script>
+  <script src="javascript/vml-circle-element.js"></script>
+  <script src="javascript/vml-image-element.js"></script>
+
+  <script src="javascript/map-object.js"></script>
+  <script src="javascript/region.js"></script>
+  <script src="javascript/marker.js"></script>
+
+  <script src="javascript/vector-canvas.js"></script>
+  <script src="javascript/simple-scale.js"></script>
+  <script src="javascript/ordinal-scale.js"></script>
+  <script src="javascript/numeric-scale.js"></script>
+  <script src="javascript/color-scale.js"></script>
+  <script src="javascript/legend.js"></script>
+  <script src="javascript/data-series.js"></script>
+  <script src="javascript/proj.js"></script>
+  <script src="javascript/map.js"></script>
+
+  <script src="javascript/jquery-jvectormap-world-mill-en.js"></script>
+  <script type="text/javascript">  
+  	function myFunction() {
+	  document.getElementById("myDropdown").classList.toggle("show");
+	}
+	function changeStateButtons(){
+		document.getElementById("state").textContent = currentState;
+		document.getElementById("secondState").textContent = (currentState == "Confirmed" ? "Active" : "Confirmed");
+	}
+  function changeChartText(){
+    document.getElementById("chartText").textContent = (currentState == "Confirmed" ? "Daily confirmed chart" : "Active cases chart");
+  }
+	function changeState() {
+		currentState = (currentState == "Confirmed" ? "Active" : "Confirmed");
+    changeChart();
+		changeStateButtons();
+    changeChartText();
+	}
+	function minimizeText(s){
+    if(s > 999999)
+      return (s / 1000000) + "M";
+		if(s > 999)
+			return (s / 1000) + "k";
+		return s;
+	}
+	// Close the dropdown menu if the user clicks outside of it
+	window.onclick = function(event) {
+	  if (!event.target.matches('.dropbtn')) {
+	    var dropdowns = document.getElementsByClassName("dropdown-content");
+	    var i;
+	    for (i = 0; i < dropdowns.length; i++) {
+	      var openDropdown = dropdowns[i];
+	      if (openDropdown.classList.contains('show')) {
+	        openDropdown.classList.remove('show');
+	      }
+	    }
+	  }
+	} 
+    function changeChart(){
+    	gv = new Dygraph(
+    		document.getElementById("div_g_v"),
+    		(currentState == "Confirmed" 
+          ? charts[currentCountry] 
+          : chartsActive[currentCountry]),
+    		{ 
+    	    color: '#4285f4',
+    	    strokeWidth: 2,
+    	    gridLineColor: 'rgb(196, 196, 196)',
+    	    axes: {
+    	          x: {
+    	            drawGrid: false
+    	          },
+    	          y: {
+    	            drawGrid: true
+    	          }
+    	        }
+    	    }
+    	);
+      var dygraphY = document.getElementsByClassName("dygraph-axis-label-y");
+      for(var i = 0;i < dygraphY.length;++ i)
+	  	dygraphY[i].textContent = minimizeText(dygraphY[i].textContent);
+    }
+    function twoDigit(n){
+      if(n < 10)
+        return "0" + n;
+      return n;
+    }
+    function getDateFromSliderPosition(sliderPos){
+      return new Date(startDate.getTime() + (1000 * 3600 * 24) * sliderPos);
+    }
+    function getFormattedDate(date){
+      return date.getFullYear() + "-" + twoDigit(date.getMonth() + 1) + "-" + twoDigit(date.getDate());
+    }
+    function updateCountry(name, src, height){
+        countryText.textContent = name;
+        countryFlag.src = src;
+        countryFlag.height = height;
+    }
+    function putCommas(s){
+      s = s.toString();
+      var t = "";
+      var x = 0;
+      for(var i = s.length - 1;i >= 0;-- i){
+        ++ x;
+        t += s[i];
+        if(x % 3 == 0 && i > 0)
+          t += ',';
+      }
+      return t.split("").reverse().join("");
+    }
+    function updateCountryInfo(code, sliderPos){
+      var date = getDateFromSliderPosition(sliderPos);
+      var formattedDate = getFormattedDate(date)
+      var countryNumbers = document.getElementsByClassName("cellNumber");
+      if(info[formattedDate][code + "confirmed"] !== undefined){
+        console.log(formattedDate + "~~");
+        countryNumbers[0].textContent = putCommas(info[formattedDate][code + "confirmed"]);
+        countryNumbers[1].textContent = putCommas(info[formattedDate][code + "recovered"]);
+        countryNumbers[2].textContent = putCommas(info[formattedDate][code + "deaths"]);
+      }
+      else {
+        countryNumbers[0].textContent = 0;
+        countryNumbers[1].textContent = 0;
+        countryNumbers[2].textContent = 0;
+      }
+    }
+    function changeToWorld(){
+        currentCountry = "WORLD";
+        updateCountry('Worldwide', './countryFlags/globe.png', 25);
+        updateCountryInfo(currentCountry, sliderPosition);
+        backButton.hidden = true;
+    }
+  </script>
+  <script type="text/javascript">
+    jQuery.noConflict();
+    jQuery(function(){
+      var $ = jQuery;
+      function play(givenWidth){
+      	updateTitle(givenWidth, 0);
+        updateSliderButtonImage("url('')"); 
+	  	  var id = setInterval(frame, 50);
+	  	  var width = givenWidth;
+	  	  function frame() {
+		      if(width >= numberOfDays) {
+            	updateSliderButtonImage("url('style/play.png')"); 
+            	updateTitle(width, 1);
+              updateCountryInfo(currentCountry, width);
+		      	clearInterval(id); 
+            sliderPosition = width;
+		      }
+		      else {
+		      	++ width;
+		      	$('input[type="range"]').val(width).change();
+		      	updateMap(width);
+            	updateCountryInfo(currentCountry, width);
+		      }
+		  }
+	  }
+	  function updateTitle(value, end = 0){
+	  	  var date = getDateFromSliderPosition(value);
+       	document.getElementById('covidDateText').innerHTML = "Covid map";
+        if(end == 1)
+        	document.getElementById('covidDateText').innerHTML += " on " + (month[date.getMonth()]) + " " + date.getDate();        
+      }
+	  function updateMap(value, changeTitle = false){
+	  	  var date = getDateFromSliderPosition(value);
+	  	  map.series.regions[0].setValues(currentState == "Confirmed" ? data[getFormattedDate(date)] : dataActive[getFormattedDate(date)]);
+	  }
+    function updateSliderButtonImage(src){
+      var button = document.getElementsByClassName("rangeslider__handle")[0];
+      button.style.backgroundImage = src;
+    }
+    $('input[type=range]').rangeslider({
+        polyfill: false,
+        onSlide: function(position, value) {
+        },
+        onSlideEnd: function(position, value) {
+          if(sliderPosition == value){
+          	play(value);          
+          }
+          else {
+            updateMap(value, true);
+          	updateTitle(value, 1);
+            updateCountryInfo(currentCountry, value);
+      	  }
+          sliderPosition = value;
+        }
+      });
+
+      $('#focus-init').click(function(){
+        $('#map1').vectorMap('set', 'focus', {scale: 1, x: 0.5, y: 0.5, animate: true});
+      });
+      var map = new jvm.Map({
+        map: 'world_mill_en',
+        container: $('#map1'),
+        panOnDrag: true,
+        focusOn: {
+          x: 0.5,
+          y: 0.5,
+          scale: 1,
+          animate: true
+        },
+        series: {
+          markers: [{
+  	        scale: ['#FFFFFF', '#B22222'],
+  	        values: [10, 5000, 100000, 1000000],
+  	        legend: {
+  	          vertical: false
+  	        }
+  	      }],
+          regions: [{
+            scale: ['#FFFFFF', '#B22222'],
+            normalizeFunction: 'polynomial',
+            values: {
+              "AF": 0, "AL": 0, "DZ": 0, "AO": 0, "AG": 0, "AR": 0, "AM": 0, "AU": 0, "AT": 0, "AZ": 0,
+      			  "BS": 0, "BH": 0, "BD": 0, "BB": 0, "BY": 0, "BE": 0, "BZ": 0, "BJ": 0, "BT": 0, "BO": 0,
+      			  "BA": 0, "BW": 0, "BR": 0, "BN": 0, "BG": 0, "BF": 0, "BI": 0, "KH": 0, "CM": 0, "CA": 0, 
+      			  "CV": 0, "CF": 0, "TD": 0, "CL": 0, "CN": 0, "CO": 0, "KM": 0, "CD": 0, "CG": 0, "CR": 0, 
+      			  "CI": 0, "HR": 0, "CY": 0, "CU": 0, "CZ": 0, "DK": 0, "DJ": 0, "DM": 0, "DO": 0, "EC": 0, 
+      			  "EG": 0, "EH": 0, "SV": 0, "GQ": 0, "ER": 0, "EE": 0, "ET": 0, "FJ": 0, "FI": 0, "FR": 0, 
+      			  "GA": 0, "GM": 0, "GE": 0, "GL": 0, "DE": 0, "GH": 0, "GR": 0, "GD": 0, "GT": 0, "GN": 0,
+      			  "GW": 0, "GY": 0, "HT": 0, "HN": 0, "HK": 0, "HU": 0, "IS": 0, "IN": 0, "ID": 0, "IR": 0, 
+      			  "IQ": 0, "IE": 0, "IL": 0, "IT": 0, "JM": 0, "JP": 0, "JO": 0, "KZ": 0, "KE": 0, "KI": 0, 
+      			  "KR": 0, "KW": 0, "KG": 0, "LA": 0, "LV": 0, "LB": 0, "LS": 0, "LR": 0, "LY": 0, "LT": 0,
+      			  "LU": 0, "MK": 0, "MG": 0, "MW": 0, "MY": 0, "MV": 0, "ML": 0, "MT": 0, "MR": 0, "MU": 0,
+      			  "MX": 0, "MD": 0, "MN": 0, "ME": 0, "MA": 0, "MZ": 0, "MM": 0, "NA": 0, "NP": 0, "NL": 0, 
+      			  "NZ": 0, "NI": 0, "NE": 0, "NG": 0, "NO": 0, "OM": 0, "PK": 0, "PA": 0, "PG": 0, "PY": 0, 
+      			  "PE": 0, "PH": 0, "PL": 0, "PT": 0, "QA": 0, "RO": 0, "RU": 0, "RW": 0, "WS": 0, "ST": 0,
+      			  "SA": 0, "SN": 0, "RS": 0, "SC": 0, "SL": 0, "SG": 0, "SK": 0, "SI": 0, "SB": 0, "ZA": 0,
+      			  "ES": 0, "LK": 0, "KN": 0, "LC": 0, "VC": 0, "KP": 0, "SD": 0, "SR": 0, "SZ": 0, "SO": 0,
+      		    "SE": 0, "CH": 0, "SY": 0, "SS": 0, "TW": 0, "TJ": 0, "TZ": 0, "TH": 0, "TL": 0, "TG": 0,
+      			  "TO": 0, "TF": 15000,      "TT": 0, "TN": 0, "TR": 0, "TM": 0, "UG": 0, "UA": 0, "AE": 0, 
+              "GB": 0, "US": 0, "UY": 0, "UZ": 0, "VU": 0, "VE": 0, "VN": 0, "YE": 0, "ZM": 0, "ZW": 0          
+            }
+          }] 
+        },
+        onRegionClick: function(event, code){
+          currentCountry = code;
+          updateCountry(map.getRegionName(code), "./countryFlags/" + code + ".png", 20);
+          updateCountryInfo(code, sliderPosition);
+          changeChart();
+          backButton.hidden = false;
+        }
+      });
+      updateMap(sliderPosition);
+      updateTitle(sliderPosition, 1);
+   });
+  </script>
+</head>
+<body>
+  <h1 id = "covidDateText" style="margin-left: 2px">
+      Covid map
+  </h1>
+  <table>
+    <tr><td>
+      <div id="map1" style="width: 750px; height: 500px">
+      </div>
+      <form>
+        <div>
+	        <br>
+	        <input id = "dateSlider" type="range" value="0" step="1" min="0">
+	        <script>
+	        	document.getElementById('dateSlider').max = numberOfDays;
+	      	</script>
+	        <br>
+        	<div class="dropdown" style="float:right">
+			  <button id = "state" type = "button" onclick="myFunction()" class="dropbtn">Confirmed</button>
+			  <div id="myDropdown" class="dropdown-content">
+			    <a id = "secondState" href="#" onclick="changeState()">Active</a>
+			  </div>
+			</div>
+        </div>  
+      </form>
+    </td>
+    <td style = "vertical-align: top">
+      <div id = "backButton" hidden = "true" onclick = "changeToWorld()" style="float:left;padding-top:2px;padding-left: 0px;">
+          <g-img style="vertical-align: middle; display: inline-block;">
+            <img src="./style/left.png" style="display: block; border: 0px;" height="25" width="30">
+          </g-img>
+      </div>
+      <div class = "infoCell">
+        <div>
+          <div style="padding-bottom: 13px;">
+            <span>
+              <g-img style="vertical-align: middle; display: inline-block;">
+                <img id = "countryFlag" src="./countryFlags/globe.png" style="display: block; border: 0px;" height="25" width="30">
+              </g-img>
+            </span>
+            <span id = "countryText">
+              Worldwide
+            </span>
+          </div>
+        </div>
+        <table style = "table-layout: fixed; border-spacing: 0 2px;'">
+          <tbody>
+            <tr>
+              <td class = "firstCell borderRight">
+                <div class = "cellText">Confirmed</div>
+                <div class="cellNumber">
+                  0
+                </div>
+              </td>
+              <td class = "cell borderRight">
+                <div class="cellText">Recovered</div>
+                <div class="cellNumber">
+                  0
+                </div>
+              </td>
+              <td class = "cell">
+                <div class="cellText">Deaths</div>
+                <div class="cellNumber">
+                  0
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <hr>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>    
+      <div>
+        <span id = "chartText">
+          Daily confirmed chart
+        </span>
+      </div>
+     <div id="div_g_v" style="left: -16px; width:600px; height:220px; position:relative;">
+    </div>
+    </td>
+  </tr>
+  </table>
+</body>
+</html>
+<script type="text/javascript">
+  window.addEventListener('load', function () {
+	  var legendTexts = document.getElementsByClassName("jvectormap-legend-tick-text");
+	  var legendColors = document.getElementsByClassName("jvectormap-legend-tick-sample");
+	  var dygraphYtexts = document.getElementsByClassName("dygraph-axis-label-y");
+	  for(var i = 0;i < dygraphYtexts.length;++ i)
+	  	dygraphYtexts[i].textContent = minimizeText(dygraphYtexts[i].textContent);
+	  legendColors[0].style.background = "#f6e4e4"; 
+	  legendColors[1].style.background = "#eac1c1"; 
+	  legendColors[2].style.background = "#db9797"; 
+	  legendColors[3].style.background = "#c96262"; 
+	  legendColors[4].style.background = "#be4242"; 
+	  legendColors[5].style.background = "#b22222"; 
+	  legendTexts[0].innerText = "1\n-\n100";
+	  legendTexts[1].innerText = "100\n-\n1k";
+	  legendTexts[2].innerText = "1k\n-\n10k";
+	  legendTexts[3].innerText = "10k\n-\n100k";
+	  legendTexts[4].innerText = "100k\n-\n1 mil.";
+	  legendTexts[5].innerText = "1 mil.\n-\n5 mil.";	 
+  });
+</script>
+<script type="text/javascript">
+    var countryText = document.getElementById("countryText");
+    var countryFlag = document.getElementById("countryFlag");
+    var backButton = document.getElementById("backButton");
+    changeChart();
+</script>
