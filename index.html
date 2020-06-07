@@ -336,7 +336,7 @@
     }
     function changeToWorld(){
         currentCountry = "WORLD";
-        updateCountry('Worldwide', '.\\countryFlags\\globe.png', 25);
+        updateCountry('Worldwide', './countryFlags/globe.png', 25);
         updateCountryInfo(currentCountry, sliderPosition);
         backButton.hidden = true;
     }
@@ -453,7 +453,7 @@
         },
         onRegionClick: function(event, code){
           currentCountry = code;
-          updateCountry(map.getRegionName(code), ".\\countryFlags\\" + code + ".png", 20);
+          updateCountry(map.getRegionName(code), "./countryFlags/" + code.toLowerCase() + ".png", 20);
           updateCountryInfo(code, sliderPosition);
           changeChart();
           backButton.hidden = false;
