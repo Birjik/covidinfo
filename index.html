@@ -246,13 +246,6 @@
   function changeChartText(){
     document.getElementById("chartText").textContent = (currentState == "Confirmed" ? "Daily confirmed chart" : "Active cases chart");
   }
-	function changeState() {
-		currentState = (currentState == "Confirmed" ? "Active" : "Confirmed");
-    changeChart();
-		changeStateButtons();
-    changeChartText();
-		updateMap(sliderPosition);
-	}
 	function minimizeText(s){
     if(s > 999999)
       return (s / 1000000) + "M";
@@ -387,6 +380,13 @@
       var button = document.getElementsByClassName("rangeslider__handle")[0];
       button.style.backgroundImage = src;
     }
+    $( "#secondState" ).click(function() {
+      currentState = (currentState == "Confirmed" ? "Active" : "Confirmed");
+      changeChart();
+      changeStateButtons();
+      changeChartText();
+      updateMap(sliderPosition);
+    });
     $('input[type=range]').rangeslider({
         polyfill: false,
         onSlide: function(position, value) {
@@ -483,7 +483,7 @@
         	<div class="dropdown" style="float:right">
 			  <button id = "state" type = "button" onclick="myFunction()" class="dropbtn">Confirmed</button>
 			  <div id="myDropdown" class="dropdown-content">
-			    <a id = "secondState" href="#" onclick="changeState()">Active</a>
+			    <a id = "secondState" href="#">Active</a>
 			  </div>
 			</div>
         </div>  
