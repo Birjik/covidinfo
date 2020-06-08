@@ -407,7 +407,7 @@ info["2019-12-30"] = {"temp": 0
 ,"CFconfirmed": 0, "CFrecovered": 0, "CFdeaths": 0
 ,"TDconfirmed": 0, "TDrecovered": 0, "TDdeaths": 0
 ,"CLconfirmed": 0, "CLrecovered": 0, "CLdeaths": 0
-,"CNconfirmed": 0, "CNrecovered": 0, "CNdeaths": 0
+,"CNconfirmed": 22, "CNrecovered": 0, "CNdeaths": 0
 ,"COconfirmed": 0, "COrecovered": 0, "COdeaths": 0
 ,"CGconfirmed": 0, "CGrecovered": 0, "CGdeaths": 0
 ,"CDconfirmed": 0, "CDrecovered": 0, "CDdeaths": 0
