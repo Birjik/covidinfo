@@ -243,7 +243,10 @@
 		document.getElementById("secondState").textContent = (currentState == "Confirmed" ? "Active" : "Confirmed");
 	}
   function changeChartText(){
-    document.getElementById("chartText").textContent = (currentState == "Confirmed" ? "Daily confirmed chart" : "Active cases chart");
+    if(charts[currentCountry] !== undefined)
+    	document.getElementById("chartText").textContent = (currentState == "Confirmed" ? "Daily confirmed chart" : "Active cases chart");
+    else
+    	document.getElementById("chartText").textContent = "";	  
   }
 	function minimizeText(s){
     if(s > 999999)
@@ -466,6 +469,7 @@
 		
           updateCountryInfo(code, sliderPosition);
           changeChart();
+	  changeChartText();
           backButton.hidden = false;
         }
       });
