@@ -457,7 +457,13 @@
         },
         onRegionClick: function(event, code){
           currentCountry = code;
-          updateCountry(map.getRegionName(code), "./countryFlags/" + code.toLowerCase() + ".png", 20);
+          if(code == "_1")
+	  	updateCountry(map.getRegionName(code), "./countryFlags/xk.png", 20);
+	  else if(code == "_2")
+		updateCountry(map.getRegionName(code), "./countryFlags/xs.png", 20); 
+	  else
+		updateCountry(map.getRegionName(code), "./countryFlags/" + code.toLowerCase() + ".png", 20);
+		
           updateCountryInfo(code, sliderPosition);
           changeChart();
           backButton.hidden = false;
