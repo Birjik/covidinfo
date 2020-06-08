@@ -322,15 +322,20 @@
       var formattedDate = getFormattedDate(date)
       var countryNumbers = document.getElementsByClassName("cellNumber");
       if(info[formattedDate][code + "confirmed"] !== undefined){
-        console.log(formattedDate + "~~");
+        var confirmedNumbers = info[formattedDate][code + "confirmed"];
+	var recoveredNumbers = info[formattedDate][code + "recovered"];
+	var deadNumbers      = info[formattedDate][code + "deaths"];
+	      
         countryNumbers[0].textContent = putCommas(info[formattedDate][code + "confirmed"]);
-        countryNumbers[1].textContent = putCommas(info[formattedDate][code + "recovered"]);
-        countryNumbers[2].textContent = putCommas(info[formattedDate][code + "deaths"]);
+	countryNumbers[1].textContent = putCommas(confirmedNumbers - recoveredNumbers - deadNumbers);      
+        countryNumbers[2].textContent = putCommas(info[formattedDate][code + "recovered"]);
+        countryNumbers[3].textContent = putCommas(info[formattedDate][code + "deaths"]);
       }
       else {
         countryNumbers[0].textContent = 0;
         countryNumbers[1].textContent = 0;
         countryNumbers[2].textContent = 0;
+        countryNumbers[3].textContent = 0;	      
       }
     }
     function changeToWorld(){
@@ -516,6 +521,12 @@
                   0
                 </div>
               </td>
+ 	      <td class = "cell borderRight">
+                <div class="cellText">Active</div>
+                <div class="cellNumber">
+                  0
+                </div>
+              </td>
               <td class = "cell borderRight">
                 <div class="cellText">Recovered</div>
                 <div class="cellNumber">
@@ -530,7 +541,7 @@
               </td>
             </tr>
             <tr>
-              <td colspan="3">
+              <td colspan="4">
                 <hr>
               </td>
             </tr>
